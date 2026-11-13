@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COSMIC UNIVERSE — Explore The Unknown | Modern Space Exploration System</title>
+  <meta name="description" content="Explore the universe, discover galaxies, simulate black holes, command a Mars colony, build rockets, and navigate the stars in COSMIC UNIVERSE.">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Dynamic 3D Starfield & Particle Canvas -->
+  <canvas id="bgStarfieldCanvas"></canvas>
+  <div class="nebula-glow-overlay"></div>
+
+  <!-- Main Platform Container -->
+  <div class="app-container">
+
+    <!-- Futuristic Holographic Navigation HUD -->
+    <header class="cosmic-header">
+      <div class="header-inner">
+        <!-- Brand Logo -->
+        <a href="#home" class="brand-wrapper nav-action-btn" data-section="home">
+          <div class="brand-icon">🌌</div>
+          <div class="brand-text">
+            <span class="brand-title">COSMIC UNIVERSE</span>
+            <span class="brand-sub">INTERACTIVE SPACE EXPEDITION</span>
+          </div>
+        </a>
+
+        <!-- Main Navigation Items -->
+        <nav>
+          <ul class="nav-menu" id="mainNavMenu">
+            <li class="nav-item">
+              <a href="#home" class="nav-link active" data-section="home">
+                <span class="nav-icon">🪐</span> Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#gallery" class="nav-link" data-section="gallery">
+                <span class="nav-icon">🌌</span> Galaxy Gallery
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#blackhole" class="nav-link" data-section="blackhole">
+                <span class="nav-icon">🕳️</span> Black Hole Secrets
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#mars" class="nav-link" data-section="mars">
+                <span class="nav-icon">🔴</span> Mars Mission
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#rocket" class="nav-link" data-section="rocket">
+                <span class="nav-icon">🚀</span> Rocket Builder
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#starfinder" class="nav-link" data-section="starfinder">
+                <span class="nav-icon">⭐</span> Star Finder
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#quiz" class="nav-link" data-section="quiz">
+                <span class="nav-icon">🧠</span> Space Quiz
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Right Utilities: Rank, Audio, Search, Mobile Toggle -->
+        <div class="header-actions">
+          <!-- Universal Search Button -->
+          <button class="hud-btn" id="navSearchBtn" title="Search Cosmic Universe" aria-label="Search">
+            <span>🔍</span> <span class="hide-mobile">Search</span>
+          </button>
+
+          <!-- Synthesizer Audio Toggle -->
+          <button class="hud-btn audio-btn" id="audioToggleBtn" title="Toggle Sci-Fi SFX" aria-label="Sound Toggle">
+            🔊 AUDIO: ON
+          </button>
+
+          <!-- Commander Progression Pill -->
+          <div class="commander-rank-pill" id="openBadgesBtn" title="View Commander Rank & Badges">
+            <span class="rank-badge-icon">🎖️</span>
+            <div class="rank-details">
+              <span class="rank-title" id="hudRankTitle">Space Cadet</span>
+              <span class="rank-meta"><span id="hudRankLevel">LVL 1</span> • <span id="hudXpDisplay">0 XP</span></span>
+            </div>
+          </div>
+
+          <!-- Mobile Hamburger -->
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Navigation Menu">
+            ☰
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- App Router Sections -->
+    <main class="sections-wrapper">
+
+      <!-- ===================================================================
+           SECTION 1: HOMEPAGE (LANDING COMMAND CENTER)
+           =================================================================== -->
+      <section id="section-home" class="cosmic-section active-section">
+        <div class="hero-wrapper">
+          <!-- Animated Celestial Body Orb -->
+          <div class="hero-planet-anchor">
+            <div class="hero-planet-glow"></div>
+            <div class="hero-planet-orb"></div>
+            <div class="hero-ring"></div>
+          </div>
+
+          <h1 class="hero-title">COSMIC UNIVERSE</h1>
+          <p class="hero-subtitle">EXPLORE THE UNIVERSE. DISCOVER THE UNKNOWN.</p>
+
+          <div class="hero-cta-group">
+            <button class="cosmic-btn primary" id="homeStartExploringBtn">
+              <span>🚀</span> START EXPLORING
+            </button>
+            <button class="cosmic-btn secondary nav-action-btn" data-section="mars">
+              <span>🔴</span> COMMAND MARS BASE
+            </button>
+            <button class="cosmic-btn secondary nav-action-btn" data-section="blackhole">
+              <span>🕳️</span> SIMULATE BLACK HOLE
+            </button>
+          </div>
+
+          <!-- Space Fact of the Day HUD -->
+          <div class="fact-of-the-day-card">
+            <div class="fact-header">
+              <div class="fact-badge">
+                <span>✨</span> SPACE FACT OF THE DAY
+              </div>
+              <button class="fact-cycle-btn" id="nextFactBtn" title="Get another space fact">
+                CYCLE FACT ↻
+              </button>
+            </div>
+            <p class="fact-text" id="factOfTheDayText">
+              "Loading celestial observation..."
+            </p>
+          </div>
+
+          <!-- Interactive Discovery Portal Grid -->
+          <div class="hero-portal-grid">
+            <div class="portal-card nav-action-btn" data-section="gallery">
+              <div class="portal-icon">🌌</div>
+              <h3 class="portal-title">Galaxy Gallery</h3>
+              <p class="portal-desc">Immerse yourself in ultra high-resolution deep space photography captured by JWST and Hubble.</p>
+              <span class="portal-link-text">OPEN GALLERY ➔</span>
+            </div>
+
+            <div class="portal-card nav-action-btn" data-section="blackhole">
+              <div class="portal-icon">🕳️</div>
+              <h3 class="portal-title">Black Hole Secrets</h3>
+              <p class="portal-desc">Simulate relativistic gravitational lensing, event horizons, spaghettification, and cosmic enigmas.</p>
+              <span class="portal-link-text">ENTER HORIZON ➔</span>
+            </div>
+
+            <div class="portal-card nav-action-btn" data-section="mars">
+              <div class="portal-icon">🔴</div>
+              <h3 class="portal-title">Mars Mission</h3>
+              <p class="portal-desc">Build habitats, generate oxygen and water, deploy rovers, and survive 100 Sols on the red planet.</p>
+              <span class="portal-link-text">BEGIN COLONY ➔</span>
+            </div>
+
+            <div class="portal-card nav-action-btn" data-section="rocket">
+              <div class="portal-icon">🚀</div>
+              <h3 class="portal-title">Rocket Builder</h3>
+              <p class="portal-desc">Assemble cryogenic stages, customize boosters and thrusters, and execute a thunderous liftoff into orbit.</p>
+              <span class="portal-link-text">BUILD ROCKET ➔</span>
+            </div>
+
+            <div class="portal-card nav-action-btn" data-section="starfinder">
+              <div class="portal-icon">⭐</div>
+              <h3 class="portal-title">Star Finder</h3>
+              <p class="portal-desc">Navigate an interactive celestial sphere to pinpoint constellations, spectral classes, and distant suns.</p>
+              <span class="portal-link-text">FIND STARS ➔</span>
+            </div>
+
+            <div class="portal-card nav-action-btn" data-section="quiz">
+              <div class="portal-icon">🧠</div>
+              <h3 class="portal-title">Space Quiz</h3>
+              <p class="portal-desc">Challenge your astronomical intellect across three difficulty tiers and earn your Grand Astrophysicist rank.</p>
+              <span class="portal-link-text">LAUNCH QUIZ ➔</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECTION 2: GALAXY GALLERY 🌌
+           =================================================================== -->
+      <section id="section-gallery" class="cosmic-section">
+        <div class="section-header-block">
+          <span class="section-tag">DEEP SPACE OBSERVATORY</span>
+          <h2 class="section-main-title">GALAXY GALLERY</h2>
+          <p class="section-subtitle">
+            Explore authentic astronomical discoveries captured by the James Webb Space Telescope, Hubble, and ground-based giant observatories.
+          </p>
+        </div>
+
+        <!-- Filter & Search Controls Bar -->
+        <div class="gallery-controls-bar">
+          <div class="filter-buttons-wrap" id="galleryFilterButtons">
+            <button class="filter-btn active" data-filter="all">All Objects</button>
+            <button class="filter-btn" data-filter="galaxies">Galaxies</button>
+            <button class="filter-btn" data-filter="nebulae">Nebulae</button>
+            <button class="filter-btn" data-filter="stars">Stars & Clusters</button>
+            <button class="filter-btn" data-filter="telescopes">Observatories</button>
+            <button class="filter-btn" data-filter="favorites">❤️ Favourites</button>
+          </div>
+
+          <div class="gallery-search-wrap">
+            <span class="gallery-search-icon">🔍</span>
+            <input type="text" id="gallerySearchInput" class="gallery-search-input" placeholder="Search by name, constellation, telescope...">
+          </div>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Rendered via js/gallery.js -->
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECTION 3: BLACK HOLE SECRETS 🕳️
+           =================================================================== -->
+      <section id="section-blackhole" class="cosmic-section">
+        <div class="section-header-block">
+          <span class="section-tag">RELATIVISTIC ASTROPHYSICS</span>
+          <h2 class="section-main-title">BLACK HOLE SECRETS</h2>
+          <p class="section-subtitle">
+            Investigate where the laws of physics push into infinite density, gravitational time dilation, and the mysteries of the spacetime continuum.
+          </p>
+        </div>
+
+        <!-- Interactive Simulation & Anatomy Split Layout -->
+        <div class="bh-experience-layout">
+          <div class="bh-sim-card">
+            <div class="canvas-container">
+              <canvas id="blackHoleCanvas"></canvas>
+              <div class="sim-overlay-hint">💡 Click or tap anywhere in the field to inject matter into the accretion flow</div>
+            </div>
+
+            <div class="bh-controls-panel">
+              <div class="control-group">
+                <span class="control-label">MASS:</span>
+                <input type="range" id="bhMassSlider" class="cosmic-slider" min="1.0" max="10.0" step="0.2" value="4.2">
+                <span class="control-val" id="bhMassVal">4.2M M☉</span>
+              </div>
+
+              <div class="control-group">
+                <span class="control-label">SPIN:</span>
+                <input type="range" id="bhSpinSlider" class="cosmic-slider" min="0.1" max="0.99" step="0.05" value="0.85">
+                <span class="control-val" id="bhSpinVal">85% c</span>
+              </div>
+
+              <button class="bh-stream-btn active" id="bhToggleStream">
+                STREAM: ACTIVE
+              </button>
+            </div>
+          </div>
+
+          <!-- Black Hole Telemetry & Anatomy Sidebar -->
+          <div class="bh-sidebar-panel">
+            <div class="bh-telemetry-box">
+              <div class="panel-header-title">
+                <span>🛰️</span> SCHWARZSCHILD TELEMETRY
+              </div>
+              <div class="modal-stat-row">
+                <span class="stat-name">Schwarzschild Radius:</span>
+                <span class="stat-val" id="bhRsValue">12.4 Million km</span>
+              </div>
+              <div class="modal-stat-row">
+                <span class="stat-name">Time Dilation:</span>
+                <span class="stat-val" id="bhTimeDilation">~4.5x slower near Horizon</span>
+              </div>
+              <div class="modal-stat-row">
+                <span class="stat-name">Central Object:</span>
+                <span class="stat-val">Kerr Rotating Singularity</span>
+              </div>
+            </div>
+
+            <div class="bh-telemetry-box">
+              <div class="panel-header-title">
+                <span>🔬</span> ANATOMY INSPECTOR (HOVER TO LOCATE)
+              </div>
+              <div class="bh-anatomy-list" id="bhAnatomyList">
+                <!-- Injected via js/app.js -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space Mysteries (Fact vs Theoretical Distinction) -->
+        <div class="mysteries-header">
+          <span class="section-tag">THE UNKNOWN COSMOS</span>
+          <h3 class="section-main-title" style="font-size: 2rem;">SPACE MYSTERIES & PARADOXES</h3>
+          <p class="section-subtitle">
+            Exploring the boundary between empirical scientific discoveries and cutting-edge theoretical frontiers.
+          </p>
+        </div>
+
+        <div class="mysteries-grid" id="spaceMysteriesList">
+          <!-- Populated via js/app.js -->
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECTION 4: MARS MISSION 🔴
+           =================================================================== -->
+      <section id="section-mars" class="cosmic-section">
+        <div class="section-header-block">
+          <span class="section-tag">COLONY COMMAND CENTER</span>
+          <h2 class="section-main-title">MARS MISSION ALPHA</h2>
+          <p class="section-subtitle">
+            You are the Commander of humanity's first permanent Martian outpost. Construct life support habitats, extract water ice, deploy mining rovers, and survive for 100 Martian Sols.
+          </p>
+        </div>
+
+        <div class="mars-dashboard">
+          <!-- HUD Header: Sols, Progress Bar, Status Badge -->
+          <div class="mars-hud-top">
+            <div class="sol-counter-box">
+              <span class="sol-label">COLONY TIMELINE</span>
+              <span class="sol-value" id="marsSolDisplay">SOL 1 / 100</span>
+            </div>
+
+            <div class="mars-progress-container">
+              <div class="progress-header">
+                <span>MISSION MILESTONE PROGRESS</span>
+                <span>TARGET: 100 SOLS</span>
+              </div>
+              <div class="cosmic-progress-track">
+                <div class="cosmic-progress-bar" id="marsMissionProgressBar" style="width: 1%;"></div>
+              </div>
+            </div>
+
+            <div class="status-badge nominal" id="marsStatusBadge">
+              🟢 SYSTEMS NOMINAL
+            </div>
+
+            <div class="mars-hud-controls">
+              <button class="cosmic-btn secondary" id="marsPlayBtn" style="padding: 0.5rem 1rem;">
+                <span class="icon">▶</span> RESUME SOLS
+              </button>
+              <button class="hud-btn" id="marsResetBtn" title="Reset Colony">
+                ↺ RESTART
+              </button>
+            </div>
+          </div>
+
+          <!-- Life Support Resource Strip -->
+          <div class="mars-resources-strip">
+            <div class="resource-meter">
+              <span class="res-icon">💨</span>
+              <div class="res-meta">
+                <span class="res-name">Oxygen (O2)</span>
+                <span class="res-val" id="res-oxygen">100%</span>
+              </div>
+            </div>
+            <div class="resource-meter">
+              <span class="res-icon">💧</span>
+              <div class="res-meta">
+                <span class="res-name">Water (H2O)</span>
+                <span class="res-val" id="res-water">100%</span>
+              </div>
+            </div>
+            <div class="resource-meter">
+              <span class="res-icon">🌱</span>
+              <div class="res-meta">
+                <span class="res-name">Food Rations</span>
+                <span class="res-val" id="res-food">80%</span>
+              </div>
+            </div>
+            <div class="resource-meter">
+              <span class="res-icon">⚡</span>
+              <div class="res-meta">
+                <span class="res-name">Power Grid</span>
+                <span class="res-val" id="res-energy">50 kW</span>
+              </div>
+            </div>
+            <div class="resource-meter">
+              <span class="res-icon">🧱</span>
+              <div class="res-meta">
+                <span class="res-name">Metal Alloy</span>
+                <span class="res-val" id="res-metal">160</span>
+              </div>
+            </div>
+            <div class="resource-meter">
+              <span class="res-icon">👨‍🚀</span>
+              <div class="res-meta">
+                <span class="res-name">Colonists</span>
+                <span class="res-val" id="res-pop">4</span>
+              </div>
+            </div>
+            <div class="resource-meter">
+              <span class="res-icon">🔬</span>
+              <div class="res-meta">
+                <span class="res-name">Research</span>
+                <span class="res-val" id="res-research">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Surface Map & Construction Catalog -->
+          <div class="mars-command-stage">
+            <div class="mars-surface-map">
+              <div class="mars-grid" id="marsGridContainer">
+                <!-- 6x6 Grid Cells Rendered via js/mars.js -->
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem;">
+                Click any open grid sector to construct the selected facility. Click existing building to inspect/recycle.
+              </div>
+            </div>
+
+            <!-- Side Tools: Construction Catalog & Telemetry Log -->
+            <div class="mars-side-tools">
+              <div class="catalog-panel">
+                <div class="panel-header-title">
+                  <span>🏗️</span> CONSTRUCTION CATALOG
+                </div>
+                <div class="building-selectors-grid" id="marsBuildingSelectors">
+                  <div class="building-card selected" data-building="habitat">
+                    <div class="b-card-icon">🏠</div>
+                    <div class="b-card-name">Bio-Hab</div>
+                    <div class="b-card-cost">Cost: 60 Metal</div>
+                  </div>
+                  <div class="building-card" data-building="greenhouse">
+                    <div class="b-card-icon">🌱</div>
+                    <div class="b-card-name">Greenhouse</div>
+                    <div class="b-card-cost">Cost: 45 Metal</div>
+                  </div>
+                  <div class="building-card" data-building="ice_extractor">
+                    <div class="b-card-icon">💧</div>
+                    <div class="b-card-name">Ice Extractor</div>
+                    <div class="b-card-cost">Cost: 50 Metal</div>
+                  </div>
+                  <div class="building-card" data-building="moxie">
+                    <div class="b-card-icon">💨</div>
+                    <div class="b-card-name">MOXIE O2</div>
+                    <div class="b-card-cost">Cost: 55 Metal</div>
+                  </div>
+                  <div class="building-card" data-building="solar_array">
+                    <div class="b-card-icon">☀️</div>
+                    <div class="b-card-name">Solar Array</div>
+                    <div class="b-card-cost">Cost: 35 Metal</div>
+                  </div>
+                  <div class="building-card" data-building="nuclear_rtg">
+                    <div class="b-card-icon">⚛️</div>
+                    <div class="b-card-name">Micro Reactor</div>
+                    <div class="b-card-cost">Cost: 120 Metal</div>
+                  </div>
+                  <div class="building-card" data-building="science_lab">
+                    <div class="b-card-icon">🔬</div>
+                    <div class="b-card-name">Science Lab</div>
+                    <div class="b-card-cost">Cost: 80 Metal</div>
+                  </div>
+                  <div class="building-card" data-building="rover_station">
+                    <div class="b-card-icon">🚜</div>
+                    <div class="b-card-name">Rover Bay</div>
+                    <div class="b-card-cost">Cost: 70 Metal</div>
+                  </div>
+                </div>
+
+                <button class="cosmic-btn primary" id="marsRoverExpeditionBtn" style="width: 100%; font-size: 0.78rem; padding: 0.65rem;">
+                  🚜 DEPLOY ROVER EXPEDITION (-15 kW)
+                </button>
+              </div>
+
+              <!-- Mission Telemetry Log -->
+              <div class="catalog-panel">
+                <div class="panel-header-title">
+                  <span>📡</span> COLONY TELEMETRY & EVENTS
+                </div>
+                <div class="mars-event-terminal" id="marsEventLog">
+                  <div class="mars-log-entry info"><span class="log-time">[SOL 001]</span> Commander on deck. Base Alpha initialized.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECTION 5: ROCKET BUILDER 🚀
+           =================================================================== -->
+      <section id="section-rocket" class="cosmic-section">
+        <div class="section-header-block">
+          <span class="section-tag">AEROSPACE PROPULSION LAB</span>
+          <h2 class="section-main-title">ROCKET BUILDER & LAUNCHPAD</h2>
+          <p class="section-subtitle">
+            Configure capsules, fuel mixtures, rocket engines, and booster stages. Compute real-time Thrust-to-Weight and Delta-V before executing an animated orbital launch!
+          </p>
+        </div>
+
+        <div class="rocket-workshop-layout">
+          <!-- Column 1: Component Customizer -->
+          <div class="rocket-config-panel">
+            <!-- Rocket Designation Name -->
+            <div class="config-section-card">
+              <div class="config-header">1. VEHICLE REGISTRATION & NAME</div>
+              <div class="rocket-name-group">
+                <input type="text" id="rocketNameInput" class="rocket-name-field" maxlength="20" placeholder="Rocket Name">
+                <button class="hud-btn" id="randomNameBtn" title="Randomize Name">🎲 RANDOM</button>
+              </div>
+            </div>
+
+            <!-- Capsule Selection -->
+            <div class="config-section-card">
+              <div class="config-header">2. COMMAND MODULE / PAYLOAD</div>
+              <div id="capsuleOptions">
+                <!-- Rendered by js/rocket.js -->
+              </div>
+            </div>
+
+            <!-- Propellant Tank Selection -->
+            <div class="config-section-card">
+              <div class="config-header">3. PROPELLANT TANK ARCHITECTURE</div>
+              <div id="tankOptions">
+                <!-- Rendered by js/rocket.js -->
+              </div>
+            </div>
+
+            <!-- Booster Selection -->
+            <div class="config-section-card">
+              <div class="config-header">4. STRAP-ON BOOSTERS</div>
+              <div id="boosterOptions">
+                <!-- Rendered by js/rocket.js -->
+              </div>
+            </div>
+
+            <!-- Engine Selection -->
+            <div class="config-section-card">
+              <div class="config-header">5. MAIN PROPULSION ENGINE</div>
+              <div id="engineOptions">
+                <!-- Rendered by js/rocket.js -->
+              </div>
+            </div>
+
+            <!-- Hull Color Scheme -->
+            <div class="config-section-card">
+              <div class="config-header">6. HULL THERMAL COATING</div>
+              <div class="color-swatches-row" id="rocketColorPalette">
+                <!-- Rendered by js/rocket.js -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Visual Rocket Schematic Preview -->
+          <div class="rocket-visualizer-card">
+            <div class="panel-header-title">
+              <span>📐</span> ASSEMBLED SCHEMATIC
+            </div>
+            <div id="rocketVisualModel">
+              <!-- Rendered dynamic SVG -->
+            </div>
+            <div class="preview-name-label" id="previewRocketName">ASTRAEA-1</div>
+          </div>
+
+          <!-- Column 3: Avionics & Launch Terminal -->
+          <div class="avionics-telemetry-card">
+            <div>
+              <div class="panel-header-title">
+                <span>📊</span> FLIGHT AVIONICS COMPUTATION
+              </div>
+              <div class="avionics-grid">
+                <div class="avionics-item">
+                  <div class="avionics-lbl">TOTAL WET MASS</div>
+                  <div class="avionics-val" id="rocketAvionicsMass">82.4 t</div>
+                </div>
+                <div class="avionics-item">
+                  <div class="avionics-lbl">TOTAL THRUST</div>
+                  <div class="avionics-val" id="rocketAvionicsThrust">6000 kN</div>
+                </div>
+                <div class="avionics-item">
+                  <div class="avionics-lbl">THRUST-TO-WEIGHT (TWR)</div>
+                  <div class="avionics-val status-good" id="rocketAvionicsTWR">1.82</div>
+                </div>
+                <div class="avionics-item">
+                  <div class="avionics-lbl">TOTAL DELTA-V</div>
+                  <div class="avionics-val" id="rocketAvionicsDeltaV">5,420 m/s</div>
+                </div>
+              </div>
+
+              <div class="readiness-badge good" id="rocketLaunchReadiness">
+                FLIGHT VEHICLE READY FOR ORBIT
+              </div>
+
+              <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1.5rem;">
+                TWR must exceed 1.15 to achieve Earth escape acceleration. Higher Delta-V allows deep space transit beyond low Earth orbit.
+              </div>
+            </div>
+
+            <button class="cosmic-btn primary" id="initiateLaunchBtn" style="width: 100%; padding: 1.1rem;">
+              <span>🚀</span> COMMENCE LAUNCH COUNTDOWN
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECTION 6: STAR FINDER ⭐
+           =================================================================== -->
+      <section id="section-starfinder" class="cosmic-section">
+        <div class="section-header-block">
+          <span class="section-tag">CELESTIAL CARTOGRAPHY</span>
+          <h2 class="section-main-title">STAR FINDER & CONSTELLATIONS</h2>
+          <p class="section-subtitle">
+            Chart the night sky, locate prominent constellations, and inspect spectral classifications, light-year distances, and cosmic stellar secrets.
+          </p>
+        </div>
+
+        <div class="star-finder-layout">
+          <!-- Sky Canvas & Controls -->
+          <div class="sky-chart-card">
+            <div class="chart-controls-strip">
+              <div class="constellation-tabs-wrap" id="constellationTabs">
+                <!-- Constellation tab buttons -->
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <button class="hud-btn active" id="toggleConstellationLines">LINES: ON</button>
+                <button class="hud-btn active" id="toggleConstellationLabels">NAMES: ON</button>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+              <input type="text" id="starSearchInput" class="gallery-search-input" placeholder="Search star (e.g. Betelgeuse, Rigel, Deneb)...">
+            </div>
+
+            <div class="sky-canvas-container">
+              <canvas id="starFinderCanvas"></canvas>
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.8rem;">
+              Hover and click stars on the celestial sphere to view comprehensive astrophysical profiles.
+            </div>
+          </div>
+
+          <!-- Star Detail Dossier Card -->
+          <div class="star-dossier-card" id="starDetailCard">
+            <!-- Rendered by js/starfinder.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECTION 7: SPACE QUIZ 🧠
+           =================================================================== -->
+      <section id="section-quiz" class="cosmic-section">
+        <div class="section-header-block">
+          <span class="section-tag">ASTROPHYSICS ACADEMY</span>
+          <h2 class="section-main-title">THE SPACE QUIZ TERMINAL</h2>
+          <p class="section-subtitle">
+            Put your astronomical knowledge to the test. Answer questions about galaxies, black holes, Mars, rockets, stars, and cosmic mysteries!
+          </p>
+        </div>
+
+        <div class="quiz-wrapper">
+          <!-- Top difficulty tabs & score HUD -->
+          <div class="quiz-top-bar">
+            <div class="diff-tabs-group" id="quizDifficultyTabs">
+              <button class="diff-tab-btn active" data-diff="all">All Difficulties</button>
+              <button class="diff-tab-btn" data-diff="easy">Cadet (Easy)</button>
+              <button class="diff-tab-btn" data-diff="medium">Specialist (Med)</button>
+              <button class="diff-tab-btn" data-diff="hard">Commander (Hard)</button>
+            </div>
+
+            <div class="quiz-score-hud">
+              <span id="quizScoreDisplay">SCORE: 0</span>
+              <span id="quizStreakDisplay">STREAK: 0 🔥</span>
+            </div>
+          </div>
+
+          <!-- Active Question Card -->
+          <div class="quiz-terminal-card" id="quizActiveCard">
+            <div class="quiz-card-header">
+              <span class="quiz-counter" id="quizCounter">QUESTION 1 OF 12</span>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <span id="quizCategoryTag" style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Galaxies</span>
+                <span class="diff-badge easy" id="quizDiffBadge">EASY</span>
+              </div>
+            </div>
+
+            <h3 class="quiz-question-title" id="quizQuestionText">
+              Loading astrophysics challenge...
+            </h3>
+
+            <div class="quiz-options-grid" id="quizOptionsContainer">
+              <!-- Populated by js/quiz.js -->
+            </div>
+
+            <!-- In-Depth Scientific Explanation -->
+            <div class="quiz-explanation-box" id="quizExplanationBox">
+              <div class="exp-title correct" id="quizExplanationTitle">✅ CORRECT ANALYSIS</div>
+              <p class="exp-text" id="quizExplanationText"></p>
+            </div>
+
+            <button class="cosmic-btn primary" id="quizNextBtn" style="display: none; width: 100%;">
+              NEXT QUESTION ➔
+            </button>
+          </div>
+
+          <!-- Results & Ranking Card -->
+          <div class="quiz-results-card" id="quizResultsScreen">
+            <div class="results-icon">🏆</div>
+            <h3 class="results-rank-title" id="resultsRankTitle">Grand Astrophysicist</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+              Your deep space telemetry assessment has been finalized by Cosmos Command.
+            </p>
+
+            <div class="results-stats-row">
+              <div class="results-stat-box">
+                <div class="results-stat-lbl">ACCURACY</div>
+                <div class="results-stat-val" id="resultsAccuracy">100%</div>
+              </div>
+              <div class="results-stat-box">
+                <div class="results-stat-lbl">FINAL SCORE</div>
+                <div class="results-stat-val" id="resultsFinalScore">1,450 PTS</div>
+              </div>
+              <div class="results-stat-box">
+                <div class="results-stat-lbl">MAX STREAK</div>
+                <div class="results-stat-val" id="resultsMaxStreak">12 🔥</div>
+              </div>
+            </div>
+
+            <button class="cosmic-btn primary" id="quizRestartBtn">
+              ↺ RETAKE QUIZ CHALLENGE
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="cosmic-footer">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <div class="footer-title">COSMIC UNIVERSE</div>
+          <div class="footer-desc">
+            An advanced interactive space exploration and astrophysics educational platform. Real NASA, ESA, Hubble, and JWST data.
+          </div>
+        </div>
+        <div class="footer-right">
+          <a class="footer-nav-link nav-action-btn" data-section="home">Home</a>
+          <a class="footer-nav-link nav-action-btn" data-section="gallery">Gallery</a>
+          <a class="footer-nav-link nav-action-btn" data-section="blackhole">Black Holes</a>
+          <a class="footer-nav-link nav-action-btn" data-section="mars">Mars</a>
+          <a class="footer-nav-link nav-action-btn" data-section="rocket">Rockets</a>
+          <a class="footer-nav-link nav-action-btn" data-section="starfinder">Stars</a>
+          <a class="footer-nav-link nav-action-btn" data-section="quiz">Quiz</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ===================================================================
+       MODALS & OVERLAYS
+       =================================================================== -->
+
+  <!-- Gallery Lightbox Modal -->
+  <div class="cosmic-modal-overlay" id="galleryDetailModal">
+    <div class="cosmic-modal-box">
+      <button class="modal-close-btn" id="closeGalleryModalBtn">✕</button>
+      <img id="modalImage" class="modal-image-view" src="" alt="Discovery Image">
+      <div class="modal-body">
+        <div class="modal-header-row">
+          <div>
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <div style="color: var(--accent-cyan); font-size: 0.85rem;" id="modalConstellation"></div>
+          </div>
+          <button class="modal-fav-toggle" id="galleryModalFavBtn">🤍 ADD TO FAVORITES</button>
+        </div>
+
+        <div class="modal-meta-grid">
+          <div class="modal-meta-item">
+            <div class="meta-label">TELESCOPE / OBSERVATORY</div>
+            <div class="meta-val" id="modalTelescope"></div>
+          </div>
+          <div class="modal-meta-item">
+            <div class="meta-label">DISTANCE FROM EARTH</div>
+            <div class="meta-val" id="modalDistance"></div>
+          </div>
+        </div>
+
+        <p class="modal-description" id="modalDesc"></p>
+
+        <div class="modal-funfact-box">
+          <div class="funfact-label">💡 ASTRONOMICAL FUN FACT</div>
+          <p class="funfact-text" id="modalFunFact"></p>
+        </div>
+
+        <div id="modalKeyStats" style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1.5rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rocket Launch Countdown & Ascent Modal -->
+  <div class="cosmic-modal-overlay" id="rocketLaunchModal">
+    <div class="cosmic-modal-box" style="max-width: 680px;">
+      <button class="modal-close-btn" id="resetLaunchBtn">✕</button>
+      <div style="padding: 1.5rem;">
+        <div class="launch-sim-container">
+          <canvas id="rocketLaunchCanvas"></canvas>
+          <div class="countdown-overlay">
+            <div class="countdown-number" id="launchCountdownNumber">10</div>
+            <div class="countdown-label" id="launchCountdownLabel">T-MINUS COUNTDOWN INITIATED</div>
+          </div>
+        </div>
+
+        <div class="launch-telemetry-bar">
+          <div>ALTITUDE: <strong style="color: #38bdf8;" id="telemetryAltitude">0.0 km</strong></div>
+          <div>SPEED: <strong style="color: #34d399;" id="telemetryVelocity">0 km/h</strong></div>
+          <div>STATUS: <strong style="color: #facc15;" id="telemetryStage">MAIN ENGINES FIRING</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mars Outcome Modal (Win/Loss) -->
+  <div class="cosmic-modal-overlay" id="marsOutcomeModal">
+    <div class="cosmic-modal-box" style="max-width: 520px; text-align: center; padding: 2.5rem;">
+      <h3 id="marsOutcomeTitle" style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 1rem;"></h3>
+      <p id="marsOutcomeDesc" style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;"></p>
+      <button class="cosmic-btn primary" onclick="document.getElementById('marsOutcomeModal').classList.remove('visible');">
+        CONTINUE EXPEDITION
+      </button>
+    </div>
+  </div>
+
+  <!-- Global Universal Search Modal -->
+  <div class="cosmic-modal-overlay" id="globalSearchModal">
+    <div class="cosmic-modal-box search-modal-box">
+      <button class="modal-close-btn" id="closeSearchModalBtn">✕</button>
+      <input type="text" id="masterSearchInput" class="master-search-bar" placeholder="Search across all cosmic discoveries..." autofocus>
+      <div class="search-results-list" id="masterSearchResults">
+        <div class="search-prompt">Type to search galaxies, stars, black holes, rockets, and missions...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Commander Badges & Achievements Modal -->
+  <div class="cosmic-modal-overlay" id="badgesModal">
+    <div class="cosmic-modal-box badges-modal-box">
+      <button class="modal-close-btn" id="closeBadgesModalBtn">✕</button>
+      <div class="panel-header-title" style="font-size: 1.4rem;">
+        <span>🎖️</span> COMMANDER ACHIEVEMENTS & CAREER DOSSIER
+      </div>
+      <p style="color: var(--text-secondary); font-size: 0.85rem;">
+        Unlock prestigious badges by exploring all sectors of the cosmos, mastering the space quiz, and establishing colonies.
+      </p>
+      <div class="badges-grid" id="badgesGridContainer">
+        <!-- Rendered by js/achievements.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Real-time Achievement Toast Notification -->
+  <div class="achievement-toast" id="achievementToast">
+    <div class="toast-icon">🏆</div>
+    <div class="toast-content">
+      <span class="toast-title">ACHIEVEMENT UNLOCKED</span>
+      <span class="toast-desc">Details of unlocked achievement</span>
+    </div>
+  </div>
+
+  <!-- Script Modules Loaded in Order -->
+  <script src="js/audio.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/starfield.js"></script>
+  <script src="js/blackhole.js"></script>
+  <script src="js/mars.js"></script>
+  <script src="js/rocket.js"></script>
+  <script src="js/starfinder.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+
